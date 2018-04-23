@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+ <body>
+  <vaadin-horizontal-layout size-full margin>
+   <vaadin-image _id="logoImage" :expand></vaadin-image>
+   <vaadin-label style-name="h3" plain-text _id="infoLabel" :center :expand="7">
+     Портал частных объявлений 
+   </vaadin-label>
+   <vaadin-horizontal-layout caption-as-html _id="searchFieldLayout" :expand="7">
+    <vaadin-vertical-layout size-auto _id="searchLayout">
+     <vaadin-horizontal-layout>
+      <vaadin-text-field _id="searchField"></vaadin-text-field>
+      <vaadin-button style-name="link icon-only" plain-text _id="searchButton"></vaadin-button>
+     </vaadin-horizontal-layout>
+     <vaadin-button style-name="link tiny" plain-text _id="advancedParametersButton">
+       Расширенные параметры 
+     </vaadin-button>
+    </vaadin-vertical-layout>
+   </vaadin-horizontal-layout>
+   <vaadin-horizontal-layout margin _id="buttonsLayout">
+    <vaadin-button icon="fonticon://Vaadin-Icons/e742" plain-text _id="settingsButton">
+      Изменить 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-vertical-layout size-auto>
+    <vaadin-button style-name="link icon-only" plain-text _id="userButton" :center :expand="5"></vaadin-button>
+    <vaadin-button style-name="link" plain-text _id="userLinkButton" :bottom :center :expand="3">
+      Войти 
+    </vaadin-button>
+   </vaadin-vertical-layout>
+  </vaadin-horizontal-layout>
+ </body>
+</html>

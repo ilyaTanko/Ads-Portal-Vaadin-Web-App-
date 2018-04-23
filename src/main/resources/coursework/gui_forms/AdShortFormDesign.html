@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+ <body>
+  <vaadin-panel height="450px">
+   <vaadin-vertical-layout style-name="adShortLayout" width-auto height="450px" margin="false">
+    <vaadin-label plain-text _id="adNameLabel">
+      Название объявления 
+    </vaadin-label>
+    <vaadin-horizontal-layout margin _id="topLayout" :expand>
+     <vaadin-image responsive width="300px" height="300px" _id="adImage"></vaadin-image>
+     <vaadin-label width="700px" height="300px" plain-text _id="adShortTextLabel" :right>
+       Текст текст текст текст текст текст текст текст текст текст 
+     </vaadin-label>
+    </vaadin-horizontal-layout>
+    <vaadin-horizontal-layout margin-left margin-right margin-top _id="bottomLayout">
+     <vaadin-label plain-text _id="categoryLabel" :expand="2">
+       Категория 
+     </vaadin-label>
+     <vaadin-label plain-text _id="authorLabel" :expand="2">
+       Автор 
+     </vaadin-label>
+     <vaadin-button style-name="link" plain-text _id="moreInfoButton" :expand="4">
+       Подробнее... 
+     </vaadin-button>
+    </vaadin-horizontal-layout>
+   </vaadin-vertical-layout>
+  </vaadin-panel>
+ </body>
+</html>

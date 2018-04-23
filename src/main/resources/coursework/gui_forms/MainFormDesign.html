@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+ <body>
+  <vaadin-horizontal-layout size-full margin>
+   <vaadin-vertical-layout width-auto height="800px" margin-left="false" margin-right="false" _id="categoriesLayout" :expand="2">
+    <vaadin-label plain-text _id="categoriesLabel">
+      Категории 
+    </vaadin-label>
+    <vaadin-horizontal-layout _id="categoriesFieldLayout">
+     <vaadin-text-field _id="categoriesField"></vaadin-text-field>
+     <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectCategoryButton"></vaadin-button>
+    </vaadin-horizontal-layout>
+    <vaadin-radio-button-group data-item-type="java.lang.String" _id="categoriesGroup">
+     <option item="Option1">Option 1</option>
+     <option item="Option2">Option 2</option>
+     <option item="Option3">Option 3</option>
+    </vaadin-radio-button-group>
+   </vaadin-vertical-layout>
+   <vaadin-vertical-layout size-auto margin-left="false" _id="centerLayout" :expand="5">
+    <vaadin-label style-name="h4" plain-text _id="usernameLabel">
+      username 
+    </vaadin-label>
+    <vaadin-button style-name="friendly" plain-text _id="userAdsButton">
+      Мои объявления 
+    </vaadin-button>
+    <vaadin-vertical-layout size-auto margin-left="false" margin-right="false" _id="lastAdsLayout">
+     <vaadin-label style-name="h3" plain-text _id="lastAdsLabel">
+       Последние публикации: 
+     </vaadin-label>
+     <vaadin-panel size-auto _id="lastAdsPanel">
+      <vaadin-vertical-layout size-auto _id="lastAdsListLayout"></vaadin-vertical-layout>
+     </vaadin-panel>
+    </vaadin-vertical-layout>
+   </vaadin-vertical-layout>
+   <vaadin-vertical-layout size-auto _id="tagsLayout" :expand="2">
+    <vaadin-label plain-text _id="tagsLabel">
+      Теги 
+    </vaadin-label>
+    <vaadin-horizontal-layout _id="tagsFieldLayout">
+     <vaadin-text-field _id="tagsField"></vaadin-text-field>
+     <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectTagButton"></vaadin-button>
+    </vaadin-horizontal-layout>
+    <vaadin-check-box-group data-item-type="java.lang.String" _id="tagsGroup">
+     <option item="Option1">Option 1</option>
+     <option item="Option2">Option 2</option>
+     <option item="Option3">Option 3</option>
+    </vaadin-check-box-group>
+   </vaadin-vertical-layout>
+  </vaadin-horizontal-layout>
+ </body>
+</html>

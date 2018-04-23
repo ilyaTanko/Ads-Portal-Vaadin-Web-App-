@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+ <body>
+  <vaadin-form-layout size-full margin>
+   <vaadin-label plain-text _id="titleLabel">
+     Регистрация 
+   </vaadin-label>
+   <vaadin-text-field icon="fonticon://Vaadin-Icons/e80d" caption="Логин" _id="loginField"></vaadin-text-field>
+   <vaadin-password-field icon="fonticon://Vaadin-Icons/e669" caption="Пароль" _id="passwordField"></vaadin-password-field>
+   <vaadin-text-field icon="fonticon://Vaadin-Icons/e686" caption="Имя" _id="nameField"></vaadin-text-field>
+   <vaadin-inline-date-field icon="fonticon://Vaadin-Icons/e63b" caption="Дата рождения" _id="dateField"></vaadin-inline-date-field>
+   <vaadin-horizontal-layout _id="buttonsLayout">
+    <vaadin-button style-name="primary" plain-text _id="registerButton">
+      Зарегистрироваться 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+  </vaadin-form-layout>
+ </body>
+</html>
