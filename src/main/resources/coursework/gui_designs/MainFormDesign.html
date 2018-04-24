@@ -15,11 +15,13 @@
      <vaadin-text-field _id="categoriesField"></vaadin-text-field>
      <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectCategoryButton"></vaadin-button>
     </vaadin-horizontal-layout>
-    <vaadin-radio-button-group data-item-type="java.lang.String" _id="categoriesGroup">
-     <option item="Option1">Option 1</option>
-     <option item="Option2">Option 2</option>
-     <option item="Option3">Option 3</option>
-    </vaadin-radio-button-group>
+    <vaadin-panel style-name="borderless" width-auto height="800px" _id="categoriesScrollPanel">
+     <vaadin-radio-button-group data-item-type="java.lang.String" _id="categoriesGroup">
+      <option item="Option1">Option 1</option>
+      <option item="Option2">Option 2</option>
+      <option item="Option3">Option 3</option>
+     </vaadin-radio-button-group>
+    </vaadin-panel>
    </vaadin-vertical-layout>
    <vaadin-vertical-layout size-auto margin-left="false" _id="centerLayout" :expand="5">
     <vaadin-label style-name="h4" plain-text _id="usernameLabel">
@@ -32,7 +34,7 @@
      <vaadin-label style-name="h3" plain-text _id="lastAdsLabel">
        Последние публикации: 
      </vaadin-label>
-     <vaadin-panel size-auto _id="lastAdsPanel">
+     <vaadin-panel width-auto height="800px" _id="lastAdsPanel">
       <vaadin-vertical-layout size-auto _id="lastAdsListLayout"></vaadin-vertical-layout>
      </vaadin-panel>
     </vaadin-vertical-layout>
@@ -45,11 +47,13 @@
      <vaadin-text-field _id="tagsField"></vaadin-text-field>
      <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectTagButton"></vaadin-button>
     </vaadin-horizontal-layout>
-    <vaadin-check-box-group data-item-type="java.lang.String" _id="tagsGroup">
-     <option item="Option1">Option 1</option>
-     <option item="Option2">Option 2</option>
-     <option item="Option3">Option 3</option>
-    </vaadin-check-box-group>
+    <vaadin-panel style-name="borderless" width-auto height="800px" _id="tagsScrollPanel">
+     <vaadin-check-box-group data-item-type="java.lang.String" _id="tagsGroup">
+      <option item="Option1">Option 1</option>
+      <option item="Option2">Option 2</option>
+      <option item="Option3">Option 3</option>
+     </vaadin-check-box-group>
+    </vaadin-panel>
    </vaadin-vertical-layout>
   </vaadin-horizontal-layout>
  </body>

@@ -8,6 +8,7 @@ import com.vaadin.ui.Window;
 import coursework.MyUI;
 import coursework.database.DatabaseWorker;
 import coursework.database.entities.UserEntity;
+import coursework.gui_designs.LoginFormDesign;
 import coursework.session.UserSession;
 
 import java.util.List;

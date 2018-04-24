@@ -6,6 +6,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Window;
 import coursework.MyUI;
+import coursework.gui_designs.HeaderFormDesign;
 import coursework.session.UserSession;
 
 import java.io.File;

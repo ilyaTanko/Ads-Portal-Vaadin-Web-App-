@@ -1,15 +1,18 @@
 package coursework.database.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tag", schema = "ads_hibernate_test_db", catalog = "")
-public class TagEntity {
+public class TagEntity implements Serializable
+{
     private int id;
     private String name;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

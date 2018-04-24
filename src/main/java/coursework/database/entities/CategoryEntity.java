@@ -1,15 +1,20 @@
 package coursework.database.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "category", schema = "ads_hibernate_test_db", catalog = "")
-public class CategoryEntity {
+public class CategoryEntity implements Serializable
+{
+    public final static int CATEGORY_NULL = -1;
+
     private int id;
     private String name;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

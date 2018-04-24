@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -181,7 +182,7 @@ public class DatabaseWorker
         return ads;
     }
 
-    public static List<AdvertisementTagEntity> getAdTagByAdId(int adIdParam)
+    public static List<AdvertisementTagEntity> getAdTagsByAdId(int adIdParam)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -191,7 +192,7 @@ public class DatabaseWorker
         return adTags;
     }
 
-    public static List<AdvertisementTagEntity> getAdTagByTagId(int tagIdParam)
+    public static List<AdvertisementTagEntity> getAdTagsByTagId(int tagIdParam)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -245,13 +246,14 @@ public class DatabaseWorker
     // Add entity
     //-------------------------------------------------------------------
 
-    public static void addAd(AdvertisementEntity ad)
+    public static int addAd(AdvertisementEntity ad)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(ad);
+        int id = (int) session.save(ad);
         session.getTransaction().commit();
         session.close();
+        return id;
     }
 
     public static void addAdTag(AdvertisementTagEntity adTag)
@@ -272,13 +274,14 @@ public class DatabaseWorker
         session.close();
     }
 
-    public static void addTag(TagEntity tag)
+    public static int addTag(TagEntity tag)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(tag);
+        int id = (Integer)session.save(tag);
         session.getTransaction().commit();
         session.close();
+        return id;
     }
 
     public static void addUser(UserEntity user)

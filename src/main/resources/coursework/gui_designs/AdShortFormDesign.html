@@ -6,28 +6,29 @@
   <meta name="vaadin-version" content="8.1.5">
  </head>
  <body>
-  <vaadin-panel height="450px">
-   <vaadin-vertical-layout style-name="adShortLayout" width-auto height="450px" margin="false">
+  <vaadin-panel size-full>
+   <vaadin-vertical-layout style-name="adShortLayout" width-auto height="450px" margin-right="false" margin-bottom="false">
     <vaadin-label plain-text _id="adNameLabel">
       Название объявления 
     </vaadin-label>
     <vaadin-horizontal-layout margin _id="topLayout" :expand>
-     <vaadin-image responsive width="300px" height="300px" _id="adImage"></vaadin-image>
-     <vaadin-label width="700px" height="300px" plain-text _id="adShortTextLabel" :right>
+     <vaadin-image responsive _id="adImage"></vaadin-image>
+     <vaadin-label width="700px" plain-text _id="adShortTextLabel" :right>
        Текст текст текст текст текст текст текст текст текст текст 
      </vaadin-label>
     </vaadin-horizontal-layout>
-    <vaadin-horizontal-layout margin-left margin-right margin-top _id="bottomLayout">
-     <vaadin-label plain-text _id="categoryLabel" :expand="2">
-       Категория 
-     </vaadin-label>
-     <vaadin-label plain-text _id="authorLabel" :expand="2">
-       Автор 
-     </vaadin-label>
-     <vaadin-button style-name="link" plain-text _id="moreInfoButton" :expand="4">
-       Подробнее... 
-     </vaadin-button>
-    </vaadin-horizontal-layout>
+    <vaadin-label plain-text _id="dateLabel">
+      Дата 
+    </vaadin-label>
+    <vaadin-label plain-text _id="categoryLabel">
+      Категория 
+    </vaadin-label>
+    <vaadin-label plain-text _id="tagsLabel">
+      Теги 
+    </vaadin-label>
+    <vaadin-button style-name="link" plain-text _id="moreInfoButton">
+      Подробнее... 
+    </vaadin-button>
    </vaadin-vertical-layout>
   </vaadin-panel>
  </body>

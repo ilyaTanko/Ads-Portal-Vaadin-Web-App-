@@ -1,11 +1,13 @@
 package coursework.database.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "advertisement_tag", schema = "ads_hibernate_test_db", catalog = "")
 @IdClass(AdvertisementTagEntityPK.class)
-public class AdvertisementTagEntity {
+public class AdvertisementTagEntity implements Serializable
+{
     private int advertisementId;
     private int tagId;
 

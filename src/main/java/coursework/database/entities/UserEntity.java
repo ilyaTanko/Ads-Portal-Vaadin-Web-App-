@@ -1,13 +1,14 @@
 package coursework.database.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "user", schema = "ads_hibernate_test_db", catalog = "")
-public class UserEntity
+public class UserEntity implements Serializable
 {
     public static final byte USER_ADMIN = 0;
     public static final byte USER_MODERATOR = 1;
@@ -22,6 +23,7 @@ public class UserEntity
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

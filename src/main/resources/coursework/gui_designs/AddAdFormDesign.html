@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+ <body>
+  <vaadin-panel size-full>
+   <vaadin-form-layout size-full margin>
+    <vaadin-label style-name="h2" plain-text _id="titleLabel">
+      Новое объявление 
+    </vaadin-label>
+    <vaadin-text-field caption="Заголовок" width="237px" _id="headlineField"></vaadin-text-field>
+    <vaadin-text-area caption="Содержание" width="475px" height="237px" _id="contentField"></vaadin-text-area>
+    <vaadin-upload button-caption="Загрузить фото..." style-name="icon-only" accept="image/*" _id="addPhotoButton"></vaadin-upload>
+    <vaadin-image responsive _id="uploadedImage"></vaadin-image>
+    <vaadin-combo-box caption="Категория" data-item-type="java.lang.String" _id="categorySelect">
+     <option item="Option1">Option 1</option>
+     <option item="Option2">Option 2</option>
+     <option item="Option3">Option 3</option>
+    </vaadin-combo-box>
+    <vaadin-horizontal-layout caption="Теги" _id="tagsLayout">
+     <vaadin-text-field _id="tagField"></vaadin-text-field>
+     <vaadin-button plain-text _id="addTagButton">
+       Добавить 
+     </vaadin-button>
+     <vaadin-button plain-text _id="deleteTagButton">
+       Удалить 
+     </vaadin-button>
+    </vaadin-horizontal-layout>
+    <vaadin-label style-name="no-margin" plain-text _id="tagsLabel"></vaadin-label>
+    <vaadin-button style-name="primary" plain-text _id="submitButton">
+      Добавить объявление 
+    </vaadin-button>
+   </vaadin-form-layout>
+  </vaadin-panel>
+ </body>
+</html>

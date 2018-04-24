@@ -1,11 +1,16 @@
 package coursework.database.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "advertisement", schema = "ads_hibernate_test_db", catalog = "")
-public class AdvertisementEntity {
+public class AdvertisementEntity implements Serializable
+{
+    public static final byte AD_NOT_ACTUAL = 0;
+    public static final byte AD_ACTUAL = 1;
+
     private int id;
     private String headline;
     private Integer categoryId;
@@ -17,6 +22,7 @@ public class AdvertisementEntity {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

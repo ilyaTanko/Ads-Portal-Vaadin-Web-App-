@@ -8,6 +8,7 @@ import com.vaadin.ui.Window;
 import coursework.MyUI;
 import coursework.database.DatabaseWorker;
 import coursework.database.entities.UserEntity;
+import coursework.gui_designs.RegisterFormDesign;
 import coursework.session.UserSession;
 
 import java.sql.Timestamp;
@@ -45,62 +46,62 @@ public class RegisterForm extends RegisterFormDesign //implements View
 
             Page.getCurrent().reload();
         }
-    }
 
-    private UserEntity checkRegistration()
-    {
-        String login = loginField.getValue();
-        String password = passwordField.getValue();
-        String name = nameField.getValue();
-        LocalDate birthdayDate = dateField.getValue();
-
-        if (nullFieldsExist(login, password, name, birthdayDate) ||
-                loginExists(login) || !isOlderThan18(birthdayDate))
-            return null;
-
-        UserEntity user = new UserEntity();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setName(name);
-        user.setBirthDate(Timestamp.valueOf(birthdayDate.atStartOfDay()));
-        user.setType(UserEntity.USER_REGULAR);
-        DatabaseWorker.addUser(user);
-        return user;
-    }
-
-    private boolean nullFieldsExist(String login, String password,
-                                    String name, LocalDate birthdayDate)
-    {
-        if (login == null || password == null || name == null || birthdayDate == null)
+        private UserEntity checkRegistration()
         {
-            Notification.show(null, "Заполните все поля",
-                    Notification.Type.WARNING_MESSAGE);
-            return true;
+            String login = loginField.getValue();
+            String password = passwordField.getValue();
+            String name = nameField.getValue();
+            LocalDate birthdayDate = dateField.getValue();
+
+            if (nullFieldsExist(login, password, name, birthdayDate) ||
+                    loginExists(login) || !isOlderThan18(birthdayDate))
+                return null;
+
+            UserEntity user = new UserEntity();
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setName(name);
+            user.setBirthDate(Timestamp.valueOf(birthdayDate.atStartOfDay()));
+            user.setType(UserEntity.USER_REGULAR);
+            DatabaseWorker.addUser(user);
+            return user;
         }
-        return false;
-    }
 
-    private boolean loginExists(String login)
-    {
-        if (DatabaseWorker.loginExists(login))
+        private boolean nullFieldsExist(String login, String password,
+                                        String name, LocalDate birthdayDate)
         {
-            Notification.show(null, "Этот логин занят. Выберите другой",
-                    Notification.Type.ERROR_MESSAGE);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isOlderThan18(LocalDate birthdayDate)
-    {
-        long age = LocalDate.from(birthdayDate).until(LocalDate.now(), ChronoUnit.YEARS);
-        if (age < 18)
-        {
-            Notification.show(null, "Вы должны быть старше 18 лет",
-                    Notification.Type.ERROR_MESSAGE);
+            if (login == null || password == null || name == null || birthdayDate == null)
+            {
+                Notification.show(null, "Заполните все поля",
+                        Notification.Type.WARNING_MESSAGE);
+                return true;
+            }
             return false;
         }
-        return true;
+
+        private boolean loginExists(String login)
+        {
+            if (DatabaseWorker.loginExists(login))
+            {
+                Notification.show(null, "Этот логин занят. Выберите другой",
+                        Notification.Type.ERROR_MESSAGE);
+                return true;
+            }
+            return false;
+        }
+
+        private boolean isOlderThan18(LocalDate birthdayDate)
+        {
+            long age = LocalDate.from(birthdayDate).until(LocalDate.now(), ChronoUnit.YEARS);
+            if (age < 18)
+            {
+                Notification.show(null, "Вы должны быть старше 18 лет",
+                        Notification.Type.ERROR_MESSAGE);
+                return false;
+            }
+            return true;
+        }
     }
 
     @SuppressWarnings("Duplicates")
