@@ -8,8 +8,9 @@ import java.sql.Timestamp;
 @Table(name = "advertisement", schema = "ads_hibernate_test_db", catalog = "")
 public class AdvertisementEntity implements Serializable
 {
-    public static final byte AD_NOT_ACTUAL = 0;
-    public static final byte AD_ACTUAL = 1;
+    public static final byte AD_NOT_APPROVED = 0;
+    public static final byte AD_APPROVED = 1;
+    public static final byte AD_CHANGES_NOT_APPROVED = 2;
 
     private int id;
     private String headline;

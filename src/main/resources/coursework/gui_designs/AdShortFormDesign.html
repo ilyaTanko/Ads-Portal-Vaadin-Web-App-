@@ -6,29 +6,55 @@
   <meta name="vaadin-version" content="8.1.5">
  </head>
  <body>
-  <vaadin-panel size-full>
-   <vaadin-vertical-layout style-name="adShortLayout" width-auto height="450px" margin-right="false" margin-bottom="false">
-    <vaadin-label plain-text _id="adNameLabel">
-      Название объявления 
-    </vaadin-label>
-    <vaadin-horizontal-layout margin _id="topLayout" :expand>
-     <vaadin-image responsive _id="adImage"></vaadin-image>
-     <vaadin-label width="700px" plain-text _id="adShortTextLabel" :right>
-       Текст текст текст текст текст текст текст текст текст текст 
-     </vaadin-label>
-    </vaadin-horizontal-layout>
-    <vaadin-label plain-text _id="dateLabel">
-      Дата 
-    </vaadin-label>
-    <vaadin-label plain-text _id="categoryLabel">
-      Категория 
-    </vaadin-label>
-    <vaadin-label plain-text _id="tagsLabel">
-      Теги 
-    </vaadin-label>
-    <vaadin-button style-name="link" plain-text _id="moreInfoButton">
-      Подробнее... 
-    </vaadin-button>
+  <vaadin-panel style-name="well" size-full>
+   <vaadin-vertical-layout style-name="adShortLayout" size-auto _id="adShortLayout">
+    <vaadin-panel style-name="borderless" size-auto _id="titlePanel">
+     <vaadin-vertical-layout size-auto margin-left="false" margin-top="false" margin-bottom="false" _id="titleLayout">
+      <vaadin-label style-name="h3" plain-text _id="adNameLabel">
+        Название объявления 
+      </vaadin-label>
+      <vaadin-label plain-text _id="dateLabel">
+        Дата 
+      </vaadin-label>
+     </vaadin-vertical-layout>
+    </vaadin-panel>
+    <vaadin-panel style-name="borderless" size-auto _id="contentPanel">
+     <vaadin-horizontal-layout _id="contentLayout">
+      <vaadin-image responsive _id="adImage"></vaadin-image>
+      <vaadin-label responsive width="700px" plain-text _id="adShortTextLabel">
+        Текст текст текст текст текст текст текст текст текст текст 
+      </vaadin-label>
+     </vaadin-horizontal-layout>
+    </vaadin-panel>
+    <vaadin-panel style-name="borderless" size-auto _id="infoPanel" :bottom>
+     <vaadin-vertical-layout size-auto margin-left="false" margin-bottom="false" _id="infoLayout">
+      <vaadin-label plain-text _id="authorLabel">
+        Автор 
+      </vaadin-label>
+      <vaadin-label plain-text _id="viewCountLabel">
+        Число просмотров 
+      </vaadin-label>
+      <vaadin-label plain-text _id="categoryLabel">
+        Категория 
+      </vaadin-label>
+      <vaadin-label plain-text _id="tagsLabel">
+        Теги 
+      </vaadin-label>
+     </vaadin-vertical-layout>
+    </vaadin-panel>
+    <vaadin-panel style-name="borderless" size-auto _id="bottomPanel" :bottom>
+     <vaadin-horizontal-layout margin-top margin-bottom _id="bottomLayout">
+      <vaadin-button style-name="link" plain-text _id="moreInfoButton">
+        Просмотреть... 
+      </vaadin-button>
+      <vaadin-button style-name="friendly" plain-text _id="editButton">
+        Редактировать 
+      </vaadin-button>
+      <vaadin-button style-name="danger" plain-text _id="deleteButton">
+        Удалить 
+      </vaadin-button>
+     </vaadin-horizontal-layout>
+    </vaadin-panel>
    </vaadin-vertical-layout>
   </vaadin-panel>
  </body>

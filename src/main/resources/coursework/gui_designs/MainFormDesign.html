@@ -24,12 +24,23 @@
     </vaadin-panel>
    </vaadin-vertical-layout>
    <vaadin-vertical-layout size-auto margin-left="false" _id="centerLayout" :expand="5">
-    <vaadin-label style-name="h4" plain-text _id="usernameLabel">
+    <vaadin-label style-name="h3" plain-text _id="usernameLabel">
       username 
     </vaadin-label>
-    <vaadin-button style-name="friendly" plain-text _id="userAdsButton">
-      Мои объявления 
-    </vaadin-button>
+    <vaadin-label plain-text _id="userTypeLabel">
+      Админ 
+    </vaadin-label>
+    <vaadin-horizontal-layout _id="buttonsLayout">
+     <vaadin-button style-name="friendly" plain-text _id="userAdsButton">
+       Мои объявления 
+     </vaadin-button>
+     <vaadin-button style-name="primary" plain-text _id="moderationButton">
+       Модерация 
+     </vaadin-button>
+     <vaadin-button style-name="primary" plain-text _id="adminButton">
+       Администрирование 
+     </vaadin-button>
+    </vaadin-horizontal-layout>
     <vaadin-vertical-layout size-auto margin-left="false" margin-right="false" _id="lastAdsLayout">
      <vaadin-label style-name="h3" plain-text _id="lastAdsLabel">
        Последние публикации: 

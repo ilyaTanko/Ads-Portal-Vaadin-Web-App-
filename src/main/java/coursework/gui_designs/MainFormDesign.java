@@ -33,7 +33,11 @@ public class MainFormDesign extends HorizontalLayout {
     protected RadioButtonGroup<String> categoriesGroup;
     protected VerticalLayout centerLayout;
     protected Label usernameLabel;
+    protected Label userTypeLabel;
+    protected HorizontalLayout buttonsLayout;
     protected Button userAdsButton;
+    protected Button moderationButton;
+    protected Button adminButton;
     protected VerticalLayout lastAdsLayout;
     protected Label lastAdsLabel;
     protected Panel lastAdsPanel;

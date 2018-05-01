@@ -1,44 +1,44 @@
 package coursework.gui_forms;
 
 import com.vaadin.server.FileResource;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Window;
 import coursework.MyUI;
 import coursework.database.DatabaseWorker;
 import coursework.database.entities.AdvertisementEntity;
 import coursework.database.entities.AdvertisementTagEntity;
 import coursework.database.entities.TagEntity;
-import coursework.gui_designs.AdShortFormDesign;
+import coursework.database.entities.UserEntity;
+import coursework.gui_designs.AdFullFormDesign;
 import coursework.session.UserSession;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdShortForm extends AdShortFormDesign
+public class AdFullForm extends AdFullFormDesign
 {
     private MyUI ui;
+    private Window subWindow = new Window();
     AdvertisementEntity ad;
 
-    private final int TEXT_LIMIT = 200;
-
-    public AdShortForm(MyUI ui, AdvertisementEntity ad)
+    public AdFullForm(MyUI ui, AdvertisementEntity ad)
     {
         this.ui = ui;
         this.ad = ad;
 
-        adImage.setSource(new FileResource(new File(getPhotoPath())));
-        adImage.setWidth(200, Unit.PIXELS);
+        image.setSource(new FileResource(new File(getPhotoPath())));
+        //image.setWidth(200, Unit.PIXELS);
 
-        adNameLabel.setValue(ad.getHeadline());
-        adShortTextLabel.setValue(truncateContent());
-        adShortTextLabel.setWidth(250, Unit.PIXELS);
-        adShortTextLabel.setHeight(250, Unit.PIXELS);
-        dateLabel.setValue("Время добавления: " + String.valueOf(ad.getPublishTime()));
+        updateViewCount();
+
+        headlineLabel.setValue(ad.getHeadline());
+        contentLabel.setValue(ad.getContent());
+        if (contentLabel.getValue().length() > 60)
+            contentLabel.setWidth(700, Unit.PIXELS);
+        viewCountLabel.setValue("Число просмотров: " + String.valueOf(ad.getViewCount()));
+        authorAndDateLabel.setValue(getAuthorAndDateInfo());
         categoryLabel.setValue(getCategoryName());
         tagsLabel.setValue(getTags());
-
-        moreInfoButton.addClickListener(new MoreInfoButtonClickListener());
     }
 
     private String getPhotoPath()
@@ -48,12 +48,20 @@ public class AdShortForm extends AdShortFormDesign
         return UserSession.getBasePath() + "/VAADIN/images/ads/" + userId + "/" + adId;
     }
 
-    private String truncateContent()
+    private void updateViewCount()
     {
-        String adContent = ad.getContent();
-        if (adContent.length() > TEXT_LIMIT)
-            return adContent.substring(0, TEXT_LIMIT) + "...";
-        return adContent;
+        ad.setViewCount(ad.getViewCount() + 1);
+        DatabaseWorker.updateAd(ad);
+    }
+
+    private String getAuthorAndDateInfo()
+    {
+        UserEntity author = DatabaseWorker.getUser(ad.getUserId());
+        String authorLogin = author.getLogin();
+        String authorName = author.getName();
+        String date = String.valueOf(ad.getPublishTime());
+
+        return "Автор: " + authorName + ", " + date;
     }
 
     private String getCategoryName()
@@ -63,6 +71,7 @@ public class AdShortForm extends AdShortFormDesign
         return "Категория: " + DatabaseWorker.getCategory(ad.getCategoryId()).getName();
     }
 
+    @SuppressWarnings("Duplicates")
     private String getTags()
     {
         final String tagsString = "Теги: ";
@@ -82,11 +91,13 @@ public class AdShortForm extends AdShortFormDesign
         return tagsString + String.join(", ", tags);
     }
 
-    private class MoreInfoButtonClickListener implements ClickListener
+    @SuppressWarnings("Duplicates")
+    public Window getWindow()
     {
-        @Override
-        public void buttonClick(ClickEvent clickEvent) {
-
-        }
+        subWindow.setContent(this);
+        subWindow.getContent().setSizeUndefined();
+        subWindow.setModal(true);
+        subWindow.center();
+        return subWindow;
     }
 }

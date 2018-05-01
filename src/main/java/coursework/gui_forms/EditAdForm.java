@@ -2,6 +2,7 @@ package coursework.gui_forms;
 
 import com.vaadin.server.FileResource;
 import com.vaadin.server.Page;
+import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Notification;
@@ -24,21 +25,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AddAdForm extends AddAdFormDesign
+public class EditAdForm extends AddAdFormDesign
 {
     private MyUI ui;
+    private AdvertisementEntity ad;
+    private boolean photoChanged = false;
     private Window subWindow = new Window();
     private File imageFile;
     private String directoryPath = getPhotoDirectoryPath();
     private List<String> tags = new ArrayList<>();
 
-    public AddAdForm(MyUI ui)
+    public EditAdForm(MyUI ui, AdvertisementEntity ad)
     {
         this.ui = ui;
+        this.ad = ad;
 
-        uploadedImage.setVisible(false);
+        titleLabel.setValue("Редактировать объявление");
+        submitButton.setCaption("Сохранить изменения");
 
         fillCategories();
+        fillPhoto();
+
+        setCategoryName();
+        setTags();
+        headlineField.setValue(ad.getHeadline());
+        contentField.setValue(ad.getContent());
 
         ImageUploader uploader = new ImageUploader();
         addPhotoButton.setReceiver(uploader);
@@ -67,8 +78,33 @@ public class AddAdForm extends AddAdFormDesign
         categorySelect.setSelectedItem("Без категории");
     }
 
+    private void fillPhoto()
+    {
+        uploadedImage.setSource(new FileResource(new File(getPhotoDirectoryPath() +
+            ad.getId())));
+    }
+
+    private void setCategoryName()
+    {
+        if (ad.getCategoryId() == null)
+             categorySelect.setValue("Без категории");
+        categorySelect.setValue(DatabaseWorker.getCategory(ad.getCategoryId()).getName());
+    }
+
+    private void setTags()
+    {
+        List<AdvertisementTagEntity> adTags = DatabaseWorker.getAdTagsByAdId(ad.getId());
+        for (AdvertisementTagEntity adTag : adTags)
+        {
+            TagEntity tag = DatabaseWorker.getTag(adTag.getTagId());
+            tags.add(tag.getName());
+        }
+        refreshTagsLabel();
+    }
+
     private class ImageUploader implements Receiver, SucceededListener
     {
+        @SuppressWarnings("Duplicates")
         @Override
         public OutputStream receiveUpload(String fileName, String mimeType)
         {
@@ -95,6 +131,7 @@ public class AddAdForm extends AddAdFormDesign
             uploadedImage.setSource(new FileResource(imageFile));
             uploadedImage.setHeight(200, Unit.PIXELS);
             uploadedImage.setVisible(true);
+            photoChanged = true;
         }
     }
 
@@ -139,17 +176,20 @@ public class AddAdForm extends AddAdFormDesign
         {
             if (!checkInput())
                 return;
-            int adId = saveAd();
-            saveTags(adId);
-            saveImage(adId);
+            saveAd();
+            saveTags();
+
+            if (photoChanged)
+                saveImage();
 
             if (UserSession.getCurrentUser().getType() == UserEntity.USER_REGULAR)
                 Notification.show(null, "Объявление отправлено на модерацию",
                         Notification.Type.HUMANIZED_MESSAGE);
             else
-                Notification.show(null, "Объявление добавлено",
+                Notification.show(null, "Объявление изменено",
                         Notification.Type.HUMANIZED_MESSAGE);
             subWindow.close();
+            Page.getCurrent().reload();
         }
 
         private boolean checkInput()
@@ -160,19 +200,11 @@ public class AddAdForm extends AddAdFormDesign
                         Notification.Type.WARNING_MESSAGE);
                 return false;
             }
-
-            if (imageFile == null) {
-                Notification.show(null, "Загрузите изображение",
-                        Notification.Type.WARNING_MESSAGE);
-                return false;
-            }
             return true;
         }
-        
-        @SuppressWarnings("Duplicates")
-        private int saveAd()
+
+        private void saveAd()
         {
-            AdvertisementEntity ad = new AdvertisementEntity();
             ad.setHeadline(headlineField.getValue());
             int categoryId = getCategoryId();
             if (categoryId == CategoryEntity.CATEGORY_NULL)
@@ -180,25 +212,25 @@ public class AddAdForm extends AddAdFormDesign
             else
                 ad.setCategoryId(categoryId);
             ad.setContent(contentField.getValue());
-            ad.setUserId(UserSession.getCurrentUser().getId());
-            ad.setPublishTime(Timestamp.valueOf(LocalDateTime.now()));
-            ad.setViewCount(0);
 
             if (UserSession.getCurrentUser().getType() == UserEntity.USER_REGULAR)
-                ad.setActual(AdvertisementEntity.AD_NOT_APPROVED);
+                ad.setActual(AdvertisementEntity.AD_CHANGES_NOT_APPROVED);
             else
                 ad.setActual(AdvertisementEntity.AD_APPROVED);
 
-            return DatabaseWorker.addAd(ad);    
+            DatabaseWorker.updateAd(ad);
         }
-        
-        @SuppressWarnings("Duplicates")
-        private void saveTags(int adId)
+
+        private void saveTags()
         {
+            List<AdvertisementTagEntity> adTags = DatabaseWorker.getAdTagsByAdId(ad.getId());
+            for (AdvertisementTagEntity adTag : adTags)
+                DatabaseWorker.deleteAdTag(adTag);
+
             for(String tagName : tags)
             {
                 int tagId = 0;
-                
+
                 List<TagEntity> tagsByName = DatabaseWorker.getTagsByName(tagName);
                 if (tagsByName.isEmpty())
                     tagId = saveTag(tagName);
@@ -207,13 +239,14 @@ public class AddAdForm extends AddAdFormDesign
                     TagEntity tag = tagsByName.get(0);
                     tagId = tag.getId();
                 }
+
                 AdvertisementTagEntity adTag = new AdvertisementTagEntity();
-                adTag.setAdvertisementId(adId);
+                adTag.setAdvertisementId(ad.getId());
                 adTag.setTagId(tagId);
                 DatabaseWorker.addAdTag(adTag);
             }
         }
-        
+
         private int saveTag(String tagName)
         {
             TagEntity tagEntity = new TagEntity();
@@ -221,17 +254,15 @@ public class AddAdForm extends AddAdFormDesign
             return DatabaseWorker.addTag(tagEntity);
         }
 
-        @SuppressWarnings("Duplicates")
-        private void saveImage(int adId)
+        private void saveImage()
         {
             try
             {
-                new File(getPhotoDirectoryPath()).mkdirs();
-                File file = new File(getPhotoDirectoryPath() + adId);
+                File file = new File(getPhotoDirectoryPath() + ad.getId());
                 Files.copy(imageFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) { e.printStackTrace(); }
         }
-        
+
         private int getCategoryId()
         {
             assert (categorySelect.getValue() != null);

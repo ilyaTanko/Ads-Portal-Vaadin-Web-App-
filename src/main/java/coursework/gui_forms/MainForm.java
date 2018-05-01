@@ -8,6 +8,7 @@ import com.vaadin.ui.Window;
 import coursework.MyUI;
 import coursework.database.DatabaseWorker;
 import coursework.database.entities.AdvertisementEntity;
+import coursework.database.entities.UserEntity;
 import coursework.gui_designs.MainFormDesign;
 import coursework.session.UserSession;
 
@@ -33,6 +34,9 @@ public class MainForm extends MainFormDesign
         handleUser();
 
         userAdsButton.addClickListener(new UserAdsButtonClickListener());
+        moderationButton.addClickListener(new ModerationButtonClickListener());
+        adminButton.addClickListener(new AdminButtonClickListener());
+
         categoriesGroup.addValueChangeListener(new CategoriesTagsChangeListener());
     }
 
@@ -42,10 +46,33 @@ public class MainForm extends MainFormDesign
         {
             usernameLabel.setVisible(false);
             userAdsButton.setVisible(false);
+            userTypeLabel.setVisible(false);
+            moderationButton.setVisible(false);
+            adminButton.setVisible(false);
         }
         else
+        {
             usernameLabel.setValue("Добро пожаловать, " +
                     UserSession.getCurrentUser().getLogin());
+
+            byte userType = UserSession.getCurrentUser().getType();
+            switch (userType)
+            {
+                case UserEntity.USER_REGULAR:
+                    userTypeLabel.setVisible(false);
+                    moderationButton.setVisible(false);
+                    adminButton.setVisible(false);
+                    break;
+                case UserEntity.USER_ADMIN:
+                    userTypeLabel.setValue("Администратор");
+                    moderationButton.setVisible(false);
+                    break;
+                case UserEntity.USER_MODERATOR:
+                    userTypeLabel.setValue("Модератор");
+                    adminButton.setVisible(false);
+                    break;
+            }
+        }
     }
 
     @SuppressWarnings("Duplicates")
@@ -71,11 +98,11 @@ public class MainForm extends MainFormDesign
 
     private void fillAds()
     {
-        ads = DatabaseWorker.getAllAds();
+        ads = DatabaseWorker.getAdsByActuality(AdvertisementEntity.AD_APPROVED);
         sortAdsByDate();
 
         for (AdvertisementEntity ad : ads)
-            lastAdsListLayout.addComponent(new AdShortForm(ui, ad));
+            lastAdsListLayout.addComponent(new GeneralAdShortForm(ui, ad));
 
         if (ads.size() < 3)
             lastAdsPanel.setHeight(String.valueOf(lastAdsPanel.getContent().getHeight()));
@@ -109,6 +136,25 @@ public class MainForm extends MainFormDesign
         {
             Window subWindow = new UserAdsForm(ui).getWindow();
             ui.addWindow(subWindow);
+        }
+    }
+
+    private class ModerationButtonClickListener implements ClickListener
+    {
+        @Override
+        public void buttonClick(ClickEvent clickEvent)
+        {
+            Window subWindow = new ModerationForm(ui).getWindow();
+            ui.addWindow(subWindow);
+        }
+    }
+
+    private class AdminButtonClickListener implements ClickListener
+    {
+        @Override
+        public void buttonClick(ClickEvent clickEvent)
+        {
+
         }
     }
 }

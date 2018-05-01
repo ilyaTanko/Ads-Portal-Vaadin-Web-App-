@@ -152,6 +152,16 @@ public class DatabaseWorker
         return ads;
     }
 
+    public static List<AdvertisementEntity> getAdsByActuality(byte actualParam)
+    {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM AdvertisementEntity WHERE actual = " + quote(actualParam));
+        List<AdvertisementEntity> ads = (List<AdvertisementEntity>)query.list();
+        session.close();
+        return ads;
+    }
+
     public static List<AdvertisementEntity> getAdsFromDate(String dateFrom)
     {
         Session session = sessionFactory.openSession();
@@ -265,13 +275,14 @@ public class DatabaseWorker
         session.close();
     }
 
-    public static void addCategory(CategoryEntity category)
+    public static int addCategory(CategoryEntity category)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(category);
+        int id = (int)session.save(category);
         session.getTransaction().commit();
         session.close();
+        return id;
     }
 
     public static int addTag(TagEntity tag)
@@ -284,13 +295,14 @@ public class DatabaseWorker
         return id;
     }
 
-    public static void addUser(UserEntity user)
+    public static int addUser(UserEntity user)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(user);
+        int id = (int)session.save(user);
         session.getTransaction().commit();
         session.close();
+        return id;
     }
 
     //-------------------------------------------------------------------
@@ -302,6 +314,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(ad);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -310,6 +323,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(adTag);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -318,6 +332,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(category);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -326,6 +341,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(tag);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -334,6 +350,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(user);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -346,6 +363,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(ad);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -354,6 +372,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(adTag);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -362,6 +381,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(category);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -370,6 +390,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(tag);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -378,6 +399,7 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(user);
+        session.getTransaction().commit();
         session.close();
     }
 
