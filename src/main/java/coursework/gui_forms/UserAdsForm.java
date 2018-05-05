@@ -101,10 +101,12 @@ public class UserAdsForm extends UserAdsFormDesign
         if (newAds.size() == 0)
         {
             newAdsPanel.setHeight(300, Unit.PIXELS);
-            newAdsPanel.setWidth(500, Unit.PIXELS);
+            newAdsPanel.setWidth(600, Unit.PIXELS);
         }
         else if (newAds.size() < 3)
             newAdsPanel.setHeight(String.valueOf(newAdsPanel.getContent().getHeight()));
+        else
+            newAdsPanel.setHeight(800, Unit.PIXELS);
     }
 
     @SuppressWarnings("Duplicates")
@@ -121,10 +123,12 @@ public class UserAdsForm extends UserAdsFormDesign
         if (editedAds.size() == 0)
         {
             editedAdsPanel.setHeight(300, Unit.PIXELS);
-            editedAdsPanel.setWidth(500, Unit.PIXELS);
+            editedAdsPanel.setWidth(600, Unit.PIXELS);
         }
         else if (editedAds.size() < 3)
             editedAdsPanel.setHeight(String.valueOf(editedAdsPanel.getContent().getHeight()));
+        else
+            newAdsPanel.setHeight(800, Unit.PIXELS);
     }
 
     @SuppressWarnings("Duplicates")
@@ -141,10 +145,12 @@ public class UserAdsForm extends UserAdsFormDesign
         if (publishedAds.size() == 0)
         {
             publishedAdsPanel.setHeight(300, Unit.PIXELS);
-            publishedAdsPanel.setWidth(500, Unit.PIXELS);
+            publishedAdsPanel.setWidth(600, Unit.PIXELS);
         }
         else if (publishedAds.size() < 3)
             publishedAdsPanel.setHeight(String.valueOf(publishedAdsPanel.getContent().getHeight()));
+        else
+            newAdsPanel.setHeight(800, Unit.PIXELS);
     }
 
 

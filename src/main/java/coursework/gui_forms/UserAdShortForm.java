@@ -60,7 +60,8 @@ public class UserAdShortForm extends AdShortFormDesign
     {
         String adContent = ad.getContent();
         if (adContent.length() > TEXT_LIMIT)
-            return adContent.substring(0, TEXT_LIMIT) + "...";
+            adContent = adContent.substring(0, TEXT_LIMIT) + "...";
+        adContent = adContent.replaceAll("\n", "<br>");
         return adContent;
     }
 

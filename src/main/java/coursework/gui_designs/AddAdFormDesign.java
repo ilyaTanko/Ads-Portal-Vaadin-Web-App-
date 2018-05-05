@@ -27,7 +27,9 @@ import com.vaadin.ui.Panel;
 public class AddAdFormDesign extends Panel {
     protected Label titleLabel;
     protected TextField headlineField;
+    protected Panel contentPanel;
     protected TextArea contentField;
+    protected Label hintLabel;
     protected Upload addPhotoButton;
     protected Image uploadedImage;
     protected ComboBox<String> categorySelect;

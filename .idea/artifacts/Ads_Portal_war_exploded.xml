@@ -32,13 +32,20 @@
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator:6.0.9.Final" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:2.0.1.Final" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.9-rc" />
+          <element id="library" level="project" name="Maven: com.vaadin:vaadin-compatibility-server:8.3.3" />
+          <element id="library" level="project" name="Maven: com.vaadin:vaadin-compatibility-shared:8.3.3" />
+          <element id="library" level="project" name="Maven: com.vaadin:vaadin-compatibility-themes:8.3.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/ads_portal-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="Ads Portal/web/Web" />
-      <element id="gwt-compiler-output" facet="Ads Portal/gwt/GWT" />
+      <element id="directory" name="VAADIN">
+        <element id="directory" name="widgetsets">
+          <element id="gwt-compiler-output" facet="Ads Portal/gwt/GWT" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

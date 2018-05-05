@@ -14,7 +14,7 @@ public class ModerationAdShortForm extends UserAdShortForm
         authorLabel.setVisible(true);
         authorLabel.setValue("Автор: " + getAuthorName());
 
-        deleteButton.setVisible(false);
+        editButton.setCaption("Модерация");
     }
 
     private String getAuthorName()

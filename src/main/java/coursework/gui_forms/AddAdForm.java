@@ -69,6 +69,7 @@ public class AddAdForm extends AddAdFormDesign
 
     private class ImageUploader implements Receiver, SucceededListener
     {
+        @SuppressWarnings("Duplicates")
         @Override
         public OutputStream receiveUpload(String fileName, String mimeType)
         {
@@ -157,6 +158,13 @@ public class AddAdForm extends AddAdFormDesign
             if (headlineField.getValue().equals("") || contentField.getValue().equals("")
                     || categorySelect.getValue().equals("")) {
                 Notification.show(null, "Заполните необходимые значения",
+                        Notification.Type.WARNING_MESSAGE);
+                return false;
+            }
+
+            if (headlineField.getValue().length() > 200)
+            {
+                Notification.show(null, "Длина заголовка не может быть больше 200 символов",
                         Notification.Type.WARNING_MESSAGE);
                 return false;
             }

@@ -12,7 +12,8 @@
       <configuration>
         <setting name="compilerMaxHeapSize" value="1024" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
-        <setting name="gwtSdkUrl" value="file://" />
+        <setting name="gwtSdkUrl" value="file://C:\Users\user\.m2\repository/com/vaadin/vaadin-client/8.3.3" />
+        <setting name="gwtSdkType" value="Vaadin-Maven" />
         <setting name="webFacet" value="Web" />
       </configuration>
     </facet>
@@ -24,6 +25,9 @@
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
@@ -63,5 +67,15 @@
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.0.9.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:2.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.9-rc" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-compatibility-server:8.3.3" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-compatibility-shared:8.3.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.vaadin:vaadin-compatibility-client:8.3.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.vaadin:vaadin-client:8.3.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.gwt:gwt-elemental:2.8.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.gwt:gwt-user:2.8.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.jsinterop:jsinterop-annotations:1.0.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.jsinterop:jsinterop-annotations:sources:1.0.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:sources:1.0.0.GA" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-compatibility-themes:8.3.3" level="project" />
   </component>
 </module>

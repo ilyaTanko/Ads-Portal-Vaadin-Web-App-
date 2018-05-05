@@ -32,7 +32,6 @@ public class EditAdForm extends AddAdFormDesign
     private boolean photoChanged = false;
     private Window subWindow = new Window();
     private File imageFile;
-    private String directoryPath = getPhotoDirectoryPath();
     private List<String> tags = new ArrayList<>();
 
     public EditAdForm(MyUI ui, AdvertisementEntity ad)
@@ -62,7 +61,7 @@ public class EditAdForm extends AddAdFormDesign
 
     private String getPhotoDirectoryPath()
     {
-        int userId = UserSession.getCurrentUser().getId();
+        int userId = ad.getUserId();
         return UserSession.getBasePath() + "/VAADIN/images/ads/" + userId + "/";
     }
 
@@ -82,6 +81,7 @@ public class EditAdForm extends AddAdFormDesign
     {
         uploadedImage.setSource(new FileResource(new File(getPhotoDirectoryPath() +
             ad.getId())));
+        uploadedImage.setHeight(200, Unit.PIXELS);
     }
 
     private void setCategoryName()
@@ -195,11 +195,20 @@ public class EditAdForm extends AddAdFormDesign
         private boolean checkInput()
         {
             if (headlineField.getValue().equals("") || contentField.getValue().equals("")
-                    || categorySelect.getValue().equals("")) {
+                    || categorySelect.getValue().equals(""))
+            {
                 Notification.show(null, "Заполните необходимые значения",
                         Notification.Type.WARNING_MESSAGE);
                 return false;
             }
+
+            if (headlineField.getValue().length() > 200)
+            {
+                Notification.show(null, "Длина заголовка не может быть больше 200 символов",
+                        Notification.Type.WARNING_MESSAGE);
+                return false;
+            }
+
             return true;
         }
 

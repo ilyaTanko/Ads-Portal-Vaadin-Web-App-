@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+ <body>
+  <vaadin-vertical-layout caption-as-html spacing="false" size-full>
+   <vaadin-label style-name="h2" plain-text _id="titleLabel" :center>
+     Управление категориями 
+   </vaadin-label>
+   <vaadin-horizontal-layout spacing="false" _id="captionLayout">
+    <vaadin-label style-name="tiny" plain-text>
+      Введите сюда значение для добавления или замены: 
+    </vaadin-label>
+   </vaadin-horizontal-layout>
+   <vaadin-horizontal-layout spacing="false" _id="fieldLayout">
+    <vaadin-text-field value-change-mode="blur" placeholder="" width="185px" _id="valueField"></vaadin-text-field>
+    <vaadin-button plain-text _id="addButton">
+      Добавить 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-horizontal-layout spacing="false" _id="buttonsLayout">
+    <vaadin-combo-box data-item-type="java.lang.String" _id="valuesCombo">
+     <option item="Option1">Option 1</option>
+     <option item="Option2">Option 2</option>
+     <option item="Option3">Option 3</option>
+    </vaadin-combo-box>
+    <vaadin-button plain-text _id="editButton">
+      Заменить 
+    </vaadin-button>
+    <vaadin-button icon="fonticon://Vaadin-Icons/e80b" style-name="icon-only" plain-text _id="deleteButton"></vaadin-button>
+   </vaadin-horizontal-layout>
+  </vaadin-vertical-layout>
+ </body>
+</html>

@@ -32,7 +32,7 @@ public class AdFullForm extends AdFullFormDesign
         updateViewCount();
 
         headlineLabel.setValue(ad.getHeadline());
-        contentLabel.setValue(ad.getContent());
+        contentLabel.setValue(ad.getContent().replaceAll("\n", "<br>"));
         if (contentLabel.getValue().length() > 60)
             contentLabel.setWidth(700, Unit.PIXELS);
         viewCountLabel.setValue("Число просмотров: " + String.valueOf(ad.getViewCount()));

@@ -58,6 +58,9 @@ public class RegisterForm extends RegisterFormDesign //implements View
                     loginExists(login) || !isOlderThan18(birthdayDate))
                 return null;
 
+            if (!checkLength(login, password, name))
+                return null;
+
             UserEntity user = new UserEntity();
             user.setLogin(login);
             user.setPassword(password);
@@ -78,6 +81,32 @@ public class RegisterForm extends RegisterFormDesign //implements View
                 return true;
             }
             return false;
+        }
+
+        private boolean checkLength(String login, String password, String name)
+        {
+            if (login.length() > 45)
+            {
+                Notification.show(null, "Логин не может быть длиннее 45 символов",
+                        Notification.Type.WARNING_MESSAGE);
+                return false;
+            }
+
+            if (password.length() > 45)
+            {
+                Notification.show(null, "Пароль не может быть длиннее 45 символов",
+                        Notification.Type.WARNING_MESSAGE);
+                return false;
+            }
+
+            if (name.length() > 99)
+            {
+                Notification.show(null, "Имя не может быть длиннее 99 символов",
+                        Notification.Type.WARNING_MESSAGE);
+                return false;
+            }
+
+            return true;
         }
 
         private boolean loginExists(String login)

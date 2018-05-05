@@ -8,6 +8,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
+import coursework.gui_forms.MainForm;
 import coursework.session.UserSession;
 import coursework.gui_forms.MainView;
 
@@ -20,16 +21,17 @@ public class MyUI extends UI
     @Override
     protected void init(VaadinRequest vaadinRequest)
     {
+        setContent(new MainForm(this));
         Navigator navigator = UserSession.createNavigator(this);
         addNavigatorViews();
         navigator.navigateTo("mainView");
+
     }
 
     private void addNavigatorViews()
     {
         Navigator navigator = UserSession.getNavigator();
         navigator.addView("mainView", mainView);
-       // navigator.addView("registerView", registerView);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

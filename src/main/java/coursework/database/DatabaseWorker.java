@@ -112,11 +112,12 @@ public class DatabaseWorker
     // Other getters
     //-------------------------------------------------------------------
 
-    public static List<AdvertisementEntity> getAdsByHeadline(String headline)
+    public static List<AdvertisementEntity> getAdsByHeadlineOrContent(String headlineParam, String contentParam)
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM AdvertisementEntity WHERE headline LIKE " + likePattern(headline));
+        Query query = session.createQuery("FROM AdvertisementEntity WHERE LOWER(headline) LIKE " +
+                likePattern(headlineParam) + " OR LOWER(content) LIKE " + likePattern(contentParam));
         List<AdvertisementEntity> ads = (List<AdvertisementEntity>)query.list();
         session.close();
         return ads;
@@ -127,16 +128,6 @@ public class DatabaseWorker
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("FROM AdvertisementEntity WHERE categoryId = " + quote(categoryIdParam));
-        List<AdvertisementEntity> ads = (List<AdvertisementEntity>)query.list();
-        session.close();
-        return ads;
-    }
-
-    public static List<AdvertisementEntity> getAdsByContent(String content)
-    {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("FROM AdvertisementEntity WHERE content " + likePattern(content));
         List<AdvertisementEntity> ads = (List<AdvertisementEntity>)query.list();
         session.close();
         return ads;
@@ -216,7 +207,17 @@ public class DatabaseWorker
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM CategoryEntity WHERE name = " + quote(categoryName));
+        Query query = session.createQuery("FROM CategoryEntity WHERE LOWER(name) = LOWER(" + quote(categoryName) + ")");
+        List<CategoryEntity> categories = (List<CategoryEntity>)query.list();
+        session.close();
+        return categories;
+    }
+
+    public static List<CategoryEntity> getCategoriesByLikeName(String categoryName)
+    {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM CategoryEntity WHERE LOWER(name) LIKE " + likePattern(categoryName));
         List<CategoryEntity> categories = (List<CategoryEntity>)query.list();
         session.close();
         return categories;
@@ -226,7 +227,17 @@ public class DatabaseWorker
     {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("FROM TagEntity WHERE name = " + quote(tagName));
+        Query query = session.createQuery("FROM TagEntity WHERE LOWER(name) = LOWER(" + quote(tagName) + ")");
+        List<TagEntity> tags = (List<TagEntity>)query.list();
+        session.close();
+        return tags;
+    }
+
+    public static List<TagEntity> getTagsByLikeName(String tagName)
+    {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("FROM TagEntity WHERE LOWER(name) LIKE " + likePattern(tagName));
         List<TagEntity> tags = (List<TagEntity>)query.list();
         session.close();
         return tags;
@@ -406,7 +417,7 @@ public class DatabaseWorker
     //------------------------------------------------------------------------
 
     private static String likePattern(String string) {
-        return "'%" + string + "%'";
+        return "LOWER('%" + string + "%')";
     }
 
     private static String quote(String string) {
@@ -447,5 +458,17 @@ public class DatabaseWorker
     {
         List<UserEntity> users = DatabaseWorker.getUsersByLogin(login);
         return !users.isEmpty();
+    }
+
+    public static boolean categoryExists(String categoryName)
+    {
+        List<CategoryEntity> categories = DatabaseWorker.getCategoriesByName(categoryName);
+        return !categories.isEmpty();
+    }
+
+    public static boolean tagExists(String tagName)
+    {
+        List<TagEntity> tags = DatabaseWorker.getTagsByName(tagName);
+        return !tags.isEmpty();
     }
 }

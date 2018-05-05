@@ -66,10 +66,12 @@ public class ModerationForm extends ModerationFormDesign
         if (newAds.size() == 0)
         {
             newAdsPanel.setHeight(300, Unit.PIXELS);
-            newAdsPanel.setWidth(500, Unit.PIXELS);
+            newAdsPanel.setWidth(600, Unit.PIXELS);
         }
         else if (newAds.size() < 3)
             newAdsPanel.setHeight(String.valueOf(newAdsPanel.getContent().getHeight()));
+        else
+            newAdsPanel.setHeight(800, Unit.PIXELS);
     }
 
     @SuppressWarnings("Duplicates")
@@ -84,10 +86,12 @@ public class ModerationForm extends ModerationFormDesign
         if (editedAds.size() == 0)
         {
             editedAdsPanel.setHeight(300, Unit.PIXELS);
-            editedAdsPanel.setWidth(500, Unit.PIXELS);
+            editedAdsPanel.setWidth(600, Unit.PIXELS);
         }
         else if (editedAds.size() < 3)
             editedAdsPanel.setHeight(String.valueOf(editedAdsPanel.getContent().getHeight()));
+        else
+            newAdsPanel.setHeight(800, Unit.PIXELS);
     }
 
     private void sortAdsByDate(List<AdvertisementEntity> ads)

@@ -11,8 +11,13 @@
     <vaadin-label style-name="h2" plain-text _id="titleLabel">
       Новое объявление 
     </vaadin-label>
-    <vaadin-text-field caption="Заголовок" width="237px" _id="headlineField"></vaadin-text-field>
-    <vaadin-text-area caption="Содержание" width="475px" height="237px" _id="contentField"></vaadin-text-area>
+    <vaadin-text-field caption="Заголовок" value-change-mode="blur" width="237px" _id="headlineField"></vaadin-text-field>
+    <vaadin-panel style-name="borderless" width="490px" height="248px" _id="contentPanel">
+     <vaadin-text-area caption="Содержание" value-change-mode="blur" width="475px" height="237px" _id="contentField"></vaadin-text-area>
+    </vaadin-panel>
+    <vaadin-label style-name="tiny" plain-text _id="hintLabel">
+      Нажмите Shift+Enter, чтобы добавить новую строку 
+    </vaadin-label>
     <vaadin-upload button-caption="Загрузить фото..." style-name="icon-only" accept="image/*" _id="addPhotoButton"></vaadin-upload>
     <vaadin-image responsive _id="uploadedImage"></vaadin-image>
     <vaadin-combo-box caption="Категория" data-item-type="java.lang.String" _id="categorySelect">

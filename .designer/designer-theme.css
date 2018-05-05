@@ -14783,3 +14783,8 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .my-img-button {
 	cursor: pointer;
 }
+
+.mytheme .v-label-content {
+	white-space: pre-wrap;
+	font-family: Serif, serif;
+}

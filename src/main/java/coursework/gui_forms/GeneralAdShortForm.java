@@ -1,6 +1,7 @@
 package coursework.gui_forms;
 
 import com.vaadin.server.FileResource;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Panel;
@@ -10,6 +11,7 @@ import coursework.database.DatabaseWorker;
 import coursework.database.entities.AdvertisementEntity;
 import coursework.database.entities.AdvertisementTagEntity;
 import coursework.database.entities.TagEntity;
+import coursework.database.entities.UserEntity;
 import coursework.gui_designs.AdShortFormDesign;
 import coursework.session.UserSession;
 
@@ -31,6 +33,12 @@ public class GeneralAdShortForm extends AdShortFormDesign
 
         editButton.setVisible(false);
         deleteButton.setVisible(false);
+        if (UserSession.getCurrentUser() != null &&
+            UserSession.getCurrentUser().getType() == UserEntity.USER_ADMIN)
+        {
+            editButton.setVisible(true);
+            deleteButton.setVisible(true);
+        }
         authorLabel.setVisible(false);
 
         adImage.setSource(new FileResource(new File(getPhotoPath())));
@@ -45,6 +53,7 @@ public class GeneralAdShortForm extends AdShortFormDesign
         tagsLabel.setValue(getTags());
 
         moreInfoButton.addClickListener(new MoreInfoButtonClickListener());
+        editButton.addClickListener(new EditButtonClickListener());
     }
 
     private String getPhotoPath()
@@ -58,7 +67,8 @@ public class GeneralAdShortForm extends AdShortFormDesign
     {
         String adContent = ad.getContent();
         if (adContent.length() > TEXT_LIMIT)
-            return adContent.substring(0, TEXT_LIMIT) + "...";
+            adContent = adContent.substring(0, TEXT_LIMIT) + "...";
+        adContent = adContent.replaceAll("\n", "<br>");
         return adContent;
     }
 
@@ -96,6 +106,16 @@ public class GeneralAdShortForm extends AdShortFormDesign
         {
             Window fullAdSubWindow = new AdFullForm(ui, ad).getWindow();
             ui.addWindow(fullAdSubWindow);
+        }
+    }
+
+    protected class EditButtonClickListener implements ClickListener
+    {
+        @Override
+        public void buttonClick(ClickEvent clickEvent)
+        {
+            Window newAddSubWindow = new EditAdForm(ui, ad).getWindow();
+            ui.addWindow(newAddSubWindow);
         }
     }
 }

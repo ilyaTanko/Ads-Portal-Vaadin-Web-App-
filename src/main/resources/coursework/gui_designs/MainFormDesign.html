@@ -2,70 +2,129 @@
 <html>
  <head>
   <meta charset="UTF-8">
-  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:7,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
   <meta name="vaadin-version" content="8.1.5">
  </head>
  <body>
-  <vaadin-horizontal-layout size-full margin>
-   <vaadin-vertical-layout width-auto height="800px" margin-left="false" margin-right="false" _id="categoriesLayout" :expand="2">
-    <vaadin-label plain-text _id="categoriesLabel">
-      Категории 
-    </vaadin-label>
-    <vaadin-horizontal-layout _id="categoriesFieldLayout">
-     <vaadin-text-field _id="categoriesField"></vaadin-text-field>
-     <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectCategoryButton"></vaadin-button>
+  <vaadin-panel style-name="borderless" size-full>
+   <vaadin-vertical-layout size-full margin="false">
+    <vaadin-horizontal-layout size-full margin-left margin-right _id="headerLayout">
+     <vaadin-horizontal-layout margin-top _id="toppestLayout" :expand="4">
+      <vaadin-image _id="logoImage"></vaadin-image>
+      <vaadin-label style-name="h3 bold" plain-text _id="infoLabel" :center>
+        Портал частных объявлений 
+      </vaadin-label>
+     </vaadin-horizontal-layout>
+     <vaadin-horizontal-layout caption-as-html width-full margin-left margin-right margin-top _id="searchFieldLayout" :center :expand="7">
+      <vaadin-text-field width-full _id="searchField" :expand="9"></vaadin-text-field>
+      <vaadin-button style-name="link icon-only" plain-text _id="searchButton" :expand></vaadin-button>
+     </vaadin-horizontal-layout>
+     <vaadin-horizontal-layout margin-top margin-bottom _id="buttonsHeaderLayout" :right :expand="3">
+      <vaadin-button icon="fonticon://Vaadin-Icons/e742" plain-text _id="settingsButton">
+        Редактировать учётную запись 
+      </vaadin-button>
+     </vaadin-horizontal-layout>
+     <vaadin-vertical-layout spacing="false" size-auto margin-left="false" margin-right="false" _id="loginButtonLayout" :right :expand>
+      <vaadin-button style-name="link icon-only" plain-text _id="userButton" :center :expand="5"></vaadin-button>
+      <vaadin-button style-name="link" plain-text _id="userLinkButton" :bottom :center :expand="3">
+        Войти 
+      </vaadin-button>
+     </vaadin-vertical-layout>
     </vaadin-horizontal-layout>
-    <vaadin-panel style-name="borderless" width-auto height="800px" _id="categoriesScrollPanel">
-     <vaadin-radio-button-group data-item-type="java.lang.String" _id="categoriesGroup">
-      <option item="Option1">Option 1</option>
-      <option item="Option2">Option 2</option>
-      <option item="Option3">Option 3</option>
-     </vaadin-radio-button-group>
-    </vaadin-panel>
-   </vaadin-vertical-layout>
-   <vaadin-vertical-layout size-auto margin-left="false" _id="centerLayout" :expand="5">
-    <vaadin-label style-name="h3" plain-text _id="usernameLabel">
-      username 
-    </vaadin-label>
-    <vaadin-label plain-text _id="userTypeLabel">
-      Админ 
-    </vaadin-label>
-    <vaadin-horizontal-layout _id="buttonsLayout">
-     <vaadin-button style-name="friendly" plain-text _id="userAdsButton">
-       Мои объявления 
-     </vaadin-button>
-     <vaadin-button style-name="primary" plain-text _id="moderationButton">
-       Модерация 
-     </vaadin-button>
-     <vaadin-button style-name="primary" plain-text _id="adminButton">
-       Администрирование 
-     </vaadin-button>
+    <vaadin-horizontal-layout _id="optionsLayout">
+     <vaadin-vertical-layout width="50%" margin-top="false" margin-bottom="false" _id="sortLayout" :expand>
+      <vaadin-label plain-text>
+        Сортировка: 
+      </vaadin-label>
+      <vaadin-radio-button-group data-item-type="java.lang.String" _id="sortRadioGroup">
+       <option item="Option1">По дате</option>
+       <option item="Option2">По количеству просмотров</option>
+      </vaadin-radio-button-group>
+     </vaadin-vertical-layout>
+     <vaadin-vertical-layout width="50%" margin-top="false" margin-bottom="false" _id="dateLayout" :right :expand>
+      <vaadin-horizontal-layout margin-right _id="dateFieldsLayout">
+       <vaadin-date-field caption="От:" enabled="false" _id="dateFromField"></vaadin-date-field>
+       <vaadin-date-field caption="До:" enabled="false" _id="dateToField"></vaadin-date-field>
+      </vaadin-horizontal-layout>
+      <vaadin-check-box caption="Не ограничивать по дате" _id="disallowDateCheckbox"></vaadin-check-box>
+     </vaadin-vertical-layout>
     </vaadin-horizontal-layout>
-    <vaadin-vertical-layout size-auto margin-left="false" margin-right="false" _id="lastAdsLayout">
-     <vaadin-label style-name="h3" plain-text _id="lastAdsLabel">
-       Последние публикации: 
-     </vaadin-label>
-     <vaadin-panel width-auto height="800px" _id="lastAdsPanel">
-      <vaadin-vertical-layout size-auto _id="lastAdsListLayout"></vaadin-vertical-layout>
-     </vaadin-panel>
-    </vaadin-vertical-layout>
-   </vaadin-vertical-layout>
-   <vaadin-vertical-layout size-auto _id="tagsLayout" :expand="2">
-    <vaadin-label plain-text _id="tagsLabel">
-      Теги 
-    </vaadin-label>
-    <vaadin-horizontal-layout _id="tagsFieldLayout">
-     <vaadin-text-field _id="tagsField"></vaadin-text-field>
-     <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectTagButton"></vaadin-button>
+    <vaadin-horizontal-layout size-full margin-left margin-right margin-bottom _id="bodyLayout">
+     <vaadin-vertical-layout width-auto height="800px" margin-left="false" margin-right="false" _id="categoriesLayout" :expand="2">
+      <vaadin-label plain-text _id="categoriesLabel">
+        Категории 
+      </vaadin-label>
+      <vaadin-horizontal-layout spacing="false" _id="categoriesFieldLayout">
+       <vaadin-combo-box data-item-type="java.lang.String" _id="categoriesCombo">
+        <option item="Option1">Option 1</option>
+        <option item="Option2">Option 2</option>
+        <option item="Option3">Option 3</option>
+       </vaadin-combo-box>
+       <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectCategoryButton"></vaadin-button>
+       <vaadin-button icon="fonticon://Vaadin-Icons/e7ad" style-name="icon-only" plain-text _id="resetCategoryButton">
+         Button 
+       </vaadin-button>
+      </vaadin-horizontal-layout>
+      <vaadin-panel style-name="borderless" width-auto height="800px" _id="categoriesScrollPanel">
+       <vaadin-radio-button-group data-item-type="java.lang.String" _id="categoriesGroup">
+        <option item="Option1">Option 1</option>
+        <option item="Option2">Option 2</option>
+        <option item="Option3">Option 3</option>
+       </vaadin-radio-button-group>
+      </vaadin-panel>
+     </vaadin-vertical-layout>
+     <vaadin-vertical-layout size-auto margin-left="false" _id="centerLayout" :expand="5">
+      <vaadin-label style-name="h3" plain-text _id="usernameLabel">
+        username 
+      </vaadin-label>
+      <vaadin-label plain-text _id="userTypeLabel">
+        Админ 
+      </vaadin-label>
+      <vaadin-horizontal-layout _id="buttonsLayout">
+       <vaadin-button style-name="friendly" plain-text _id="userAdsButton">
+         Мои объявления 
+       </vaadin-button>
+       <vaadin-button style-name="primary" plain-text _id="moderationButton">
+         Модерация 
+       </vaadin-button>
+       <vaadin-button style-name="primary" plain-text _id="adminButton">
+         Администрирование 
+       </vaadin-button>
+      </vaadin-horizontal-layout>
+      <vaadin-vertical-layout size-auto margin-left="false" margin-right="false" _id="lastAdsLayout">
+       <vaadin-label style-name="h3" plain-text _id="lastAdsLabel">
+         Публикации: 
+       </vaadin-label>
+       <vaadin-panel width-auto height="800px" _id="lastAdsPanel">
+        <vaadin-vertical-layout size-auto _id="lastAdsListLayout"></vaadin-vertical-layout>
+       </vaadin-panel>
+      </vaadin-vertical-layout>
+     </vaadin-vertical-layout>
+     <vaadin-vertical-layout size-auto _id="tagsLayout" :expand="2">
+      <vaadin-label plain-text _id="tagsLabel">
+        Теги 
+      </vaadin-label>
+      <vaadin-horizontal-layout spacing="false" _id="tagsFieldLayout">
+       <vaadin-combo-box data-item-type="java.lang.String" _id="tagsCombo">
+        <option item="Option1">Option 1</option>
+        <option item="Option2">Option 2</option>
+        <option item="Option3">Option 3</option>
+       </vaadin-combo-box>
+       <vaadin-button icon="fonticon://Vaadin-Icons/e922" style-name="icon-only" plain-text _id="selectTagButton"></vaadin-button>
+       <vaadin-button icon="fonticon://Vaadin-Icons/e7ad" style-name="icon-only" plain-text _id="resetTagButton">
+         Button 
+       </vaadin-button>
+      </vaadin-horizontal-layout>
+      <vaadin-panel style-name="borderless" width-auto height="800px" _id="tagsScrollPanel">
+       <vaadin-check-box-group data-item-type="java.lang.String" _id="tagsGroup">
+        <option item="Option1">Option 1</option>
+        <option item="Option2">Option 2</option>
+        <option item="Option3">Option 3</option>
+       </vaadin-check-box-group>
+      </vaadin-panel>
+     </vaadin-vertical-layout>
     </vaadin-horizontal-layout>
-    <vaadin-panel style-name="borderless" width-auto height="800px" _id="tagsScrollPanel">
-     <vaadin-check-box-group data-item-type="java.lang.String" _id="tagsGroup">
-      <option item="Option1">Option 1</option>
-      <option item="Option2">Option 2</option>
-      <option item="Option3">Option 3</option>
-     </vaadin-check-box-group>
-    </vaadin-panel>
    </vaadin-vertical-layout>
-  </vaadin-horizontal-layout>
+  </vaadin-panel>
  </body>
 </html>
